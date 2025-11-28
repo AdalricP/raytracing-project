@@ -1,5 +1,6 @@
 CXX = clang++
-CXXFLAGS = -std=c++17 -O2 -Wall -Wextra -g
+CXXFLAGS = -std=c++17 -O2 -Wall -Wextra -g $(shell sdl2-config --cflags)
+LDFLAGS = $(shell sdl2-config --libs)
 SRC_DIR = src
 BUILD_DIR = build
 OUTPUT_DIR = output
@@ -14,7 +15,7 @@ all: $(TARGET)
 build: $(TARGET)
 
 $(TARGET): $(SOURCES) | $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(TARGET) $(LDFLAGS)
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
